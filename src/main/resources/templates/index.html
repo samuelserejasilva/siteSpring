@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <meta charset="UTF-8">
+        <title>Portal Auditoria</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+        <header class="topbar">
+            <h1>Portal Auditoria</h1>
+            <nav>
+                <a th:href="@{/}">Home</a>
+
+                <a sec:authorize="isAnonymous()" th:href="@{/login}">Entrar</a>
+
+                <!-- Logout via POST (com CSRF) -->
+                <a sec:authorize="isAuthenticated()" href="#"
+                   onclick="document.getElementById('logoutForm').submit();return false;">Sair</a>
+                <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </form>
+            </nav>
+        </header>
+
+        <main class="container">
+            <div th:if="${param.error}">
+                <p style="color:#c00">Falha ao autenticar. Tente novamente.</p>
+            </div>
+
+            <!-- Visitante -->
+            <div sec:authorize="isAnonymous()">
+                <p>Você não está autenticado.</p>
+                <a class="btn" th:href="@{/oauth2/authorization/google}">Entrar com Google</a>
+            </div>
+
+            <!-- Logado -->
+            <div sec:authorize="isAuthenticated()">
+                <h2>Olá, <span sec:authentication="principal.attributes['name']"></span>!</h2>
+                <p><span sec:authentication="principal.attributes['email']"></span></p>
+
+                <img th:if="${#authentication.principal.attributes['picture']}"
+                     th:src="${#authentication.principal.attributes['picture']}"
+                     alt="Foto do perfil" width="96" height="96"
+                     style="border-radius:50%;object-fit:cover;box-shadow:0 0 5px rgba(0,0,0,.2)">
+            </div>
+        </main>
+    </body>
+</html>
