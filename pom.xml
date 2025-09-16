@@ -15,11 +15,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>portalweb</name>
     <description>Projeto Spring Boot para o site Portal Auditoria (AMP + Thymeleaf + MariaDB)</description>
-
     <properties>
         <java.version>21</java.version>
     </properties>
-
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -38,7 +36,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
         <!-- Security / OAuth2 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,7 +49,6 @@
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
-
         <!-- DB -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
@@ -68,7 +64,6 @@
             <artifactId>flyway-mysql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
         <!-- Dev -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,7 +71,6 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-
         <!-- Config processor (IDE autocomplete) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
