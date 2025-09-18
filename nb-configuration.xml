@@ -18,5 +18,6 @@ Any value defined here will override the pom.xml file value but is only applicab
         <com-github-philippefichet-sonarlint4netbeans.extraProperties>{}</com-github-philippefichet-sonarlint4netbeans.extraProperties>
         <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
         <netbeans.hint.jdkPlatform>JDK_21</netbeans.hint.jdkPlatform>
+        <netbeans.compile.on.save>none</netbeans.compile.on.save>
     </properties>
 </project-shared-configuration>

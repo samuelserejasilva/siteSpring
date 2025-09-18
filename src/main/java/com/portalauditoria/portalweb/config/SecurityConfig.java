@@ -15,29 +15,29 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http, UsuarioService usuarioService) throws Exception {
-    http
-      .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/", "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-        .anyRequest().authenticated()
-      )
-      .oauth2Login(oauth -> oauth
-        .userInfoEndpoint(user -> user.oidcUserService(oidcUserService(usuarioService)))
-        .defaultSuccessUrl("/", true)
-      )
-      .logout(l -> l.logoutSuccessUrl("/").permitAll());
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http, UsuarioService usuarioService) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                .anyRequest().authenticated()
+                )
+                .oauth2Login(oauth -> oauth
+                .userInfoEndpoint(user -> user.oidcUserService(oidcUserService(usuarioService)))
+                .defaultSuccessUrl("/", true)
+                )
+                .logout(l -> l.logoutSuccessUrl("/").permitAll());
 
-    return http.build();
-  }
+        return http.build();
+    }
 
-  // >>> tipo correto é a interface funcional OAuth2UserService <<<
-  private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService(UsuarioService usuarioService) {
-    OidcUserService delegate = new OidcUserService();
-    return (OidcUserRequest userRequest) -> {
-      OidcUser oidcUser = delegate.loadUser(userRequest);
-      usuarioService.upsertFromGoogle(oidcUser); // salva/atualiza no banco
-      return oidcUser;
-    };
-  }
+    // >>> tipo correto é a interface funcional OAuth2UserService <<<
+    private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService(UsuarioService usuarioService) {
+        OidcUserService delegate = new OidcUserService();
+        return (OidcUserRequest userRequest) -> {
+            OidcUser oidcUser = delegate.loadUser(userRequest);
+            usuarioService.upsertFromGoogle(oidcUser); // salva/atualiza no banco
+            return oidcUser;
+        };
+    }
 }

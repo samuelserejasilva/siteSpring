@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-    <!-- Run com DEV -->
     <action>
         <actionName>run</actionName>
-        <displayName>Run (dev)</displayName>
+        <displayName>Run</displayName>
         <goals>
             <goal>spring-boot:run</goal>
         </goals>
-        <properties>
-            <run.profiles>dev</run.profiles>
-        </properties>
-    </action>
-
-    <!-- Run com PROD -->
-    <action>
-        <actionName>run</actionName>
-        <displayName>Run (prod)</displayName>
-        <goals>
-            <goal>spring-boot:run</goal>
-        </goals>
-        <properties>
-            <run.profiles>prod</run.profiles>
-        </properties>
     </action>
 </actions>
